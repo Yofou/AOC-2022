@@ -1,9 +1,8 @@
-import { readFile } from "fs/promises";
+import { parseInput } from "../utils/parseInput";
 
-const FILE = "./Day-1/data.txt";
+const FILE = "./Day-1/test.txt";
 const collectTotalCalories = async () => {
-	const read = await readFile(FILE, "utf8").then((res) => res.toString());
-	const parsed = read.split("\n").map((val) => parseInt(val, 10));
+	const parsed = await parseInput(FILE, (val) => parseInt(val, 10));
 	parsed.pop();
 
 	const collect = parsed.reduce<number[][]>(
@@ -29,6 +28,7 @@ const collectTotalCalories = async () => {
 
 const partOne = async () => {
 	const totalCalories = await collectTotalCalories();
+	console.log(totalCalories)
 	const maxCalories = totalCalories.reduce(
 		(max, curr) => (curr > max ? curr : max),
 		totalCalories[0]
